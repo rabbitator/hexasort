@@ -18,19 +18,6 @@ namespace HexaSort.DependencyInjection
             _factories[typeof(T)] = factory;
         }
 
-        public void RegisterSingleton<TInterface, TImplementation>() where TImplementation : class, TInterface, new()
-        {
-            _factories[typeof(TInterface)] = container =>
-            {
-                if (!_instances.ContainsKey(typeof(TInterface)))
-                {
-                    _instances[typeof(TInterface)] = new TImplementation();
-                }
-
-                return _instances[typeof(TInterface)];
-            };
-        }
-
         public T Resolve<T>() where T : class
         {
             var type = typeof(T);
