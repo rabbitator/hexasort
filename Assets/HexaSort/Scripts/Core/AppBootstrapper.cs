@@ -16,8 +16,13 @@ namespace HexaSort.Core
 {
     public class AppBootstrapper
     {
+        private bool _started;
+
         public void Start()
         {
+            if (_started) return;
+
+            _started = true;
             StartAsync().Forget();
         }
 
