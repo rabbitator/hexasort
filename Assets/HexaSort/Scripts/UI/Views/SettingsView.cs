@@ -1,4 +1,6 @@
+using UnityEngine;
+
 namespace HexaSort.UI.Views
 {
-    public class SettingsView { }
+    public class SettingsView : MonoBehaviour { }
 }

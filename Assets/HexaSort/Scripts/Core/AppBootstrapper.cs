@@ -9,6 +9,8 @@ using HexaSort.Game.Level;
 using HexaSort.GameResources;
 using HexaSort.Localization;
 using HexaSort.Storage;
+using HexaSort.Tweening;
+using HexaSort.UI;
 
 namespace HexaSort.Core
 {
@@ -61,6 +63,15 @@ namespace HexaSort.Core
             // Game logic
             container.RegisterFactory(c => new HexGrid(c.Resolve<GameConfiguration>()));
             container.RegisterFactory(c => new ScoreCalculator(c.Resolve<GameConfiguration>()));
+
+            // UI
+            container.RegisterFactory(c => new UITransition(c.Resolve<Tweener>()));
+            container.RegisterFactory(c => new ViewBinder());
+            container.RegisterFactory(c => new ViewPresenter(
+                c.Resolve<UITransition>(),
+                c.Resolve<ViewBinder>(),
+                c.Resolve<GameConfiguration>(),
+                c.Resolve<IResourceProvider>()));
 
             // Game states
             container.RegisterFactory(c => new LobbyState());
