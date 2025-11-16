@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Main
+  m_EditorClassIdentifier: 
+  m_GroupName: Main
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 6dae08699224cd44eaeb0b495aedb9db
+  m_SerializeEntries:
+  - m_GUID: 38e6559731678b24688a2792c7d8cddb
+    m_Address: Hexagon
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b501cbd6966ae1458b9d7f80f73c5c7
+    m_Address: Cell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7c3efa58bb16973448e5fc2b57514d62
+    m_Address: HexMap_1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 87622e58149ab634b9f538fc81a70bd4
+    m_Address: HexMap_3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c4e555d1ab7ed74e9a80ac4efa29f89
+    m_Address: UI
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a8890a4c5a0a9f3448d8ef279f210448
+    m_Address: HexaSortConfig
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b000db06932b87d46a2ddce1da54d3be
+    m_Address: HexMap_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 14fcb84dba04acf4ba17730f9ff850b4, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 764f588bb449d4f48b630d8ea939e09d, type: 2}
+    - {fileID: 11400000, guid: e3f9b0caa6fe0e3469a1fa35d8c36306, type: 2}
