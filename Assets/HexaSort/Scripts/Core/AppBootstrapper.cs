@@ -32,13 +32,13 @@ namespace HexaSort.Core
 
         private async UniTask RegisterServicesAsync(Container container)
         {
-            // Configuration
-            container.RegisterFactory(c => new ConfigurationLoader());
-            container.RegisterInstance(await container.Resolve<ConfigurationLoader>().LoadAsync<GameConfiguration>());
-
             // Resources
-            container.RegisterSingleton<IResourceProvider, AddressableResourceProvider>();
+            container.RegisterFactory<IResourceProvider>(c => new AddressableResourceProvider());
             container.RegisterFactory(c => new ResourceCache(c.Resolve<IResourceProvider>()));
+
+            // Configuration
+            container.RegisterFactory(c => new ConfigurationLoader(container.Resolve<IResourceProvider>()));
+            container.RegisterInstance(await container.Resolve<ConfigurationLoader>().LoadAsync());
 
             // Audio
             container.RegisterFactory(c => new UnityAudioPlayer(c.Resolve<GameConfiguration>()));
