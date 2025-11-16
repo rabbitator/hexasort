@@ -45,7 +45,7 @@ namespace HexaSort.Core
             container.RegisterInstance<IAudioPlayer>(container.Resolve<UnityAudioPlayer>());
 
             // Storage
-            container.RegisterSingleton<ISaveDataStorage, PlayerPrefsStorage>();
+            container.RegisterFactory<ISaveDataStorage>(c => new PlayerPrefsStorage());
 
             // Analytics
             container.RegisterFactory(c => new EventBatcher(c.Resolve<GameConfiguration>()));
