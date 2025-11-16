@@ -56,12 +56,12 @@ namespace HexaSort.Core
             // Localization
             container.RegisterFactory(c => new LocalizationProvider());
 
+            // Animations
+            container.RegisterFactory(c => new Tweener(c.Resolve<GameConfiguration>()));
+
             // Game
             container.RegisterFactory(c => new HexGrid(c.Resolve<GameConfiguration>()));
-            container.RegisterFactory(c => new LevelLoader(c.Resolve<IResourceProvider>()));
-
-            // Game logic
-            container.RegisterFactory(c => new HexGrid(c.Resolve<GameConfiguration>()));
+            container.RegisterFactory(c => new LevelLoader(c.Resolve<GameConfiguration>(), c.Resolve<IResourceProvider>()));
             container.RegisterFactory(c => new ScoreCalculator(c.Resolve<GameConfiguration>()));
 
             // UI
@@ -75,7 +75,11 @@ namespace HexaSort.Core
 
             // Game states
             container.RegisterFactory(c => new LobbyState());
-            container.RegisterFactory(c => new GameplayState(c.Resolve<HexGrid>(), c.Resolve<ScoreCalculator>()));
+            container.RegisterFactory(c => new GameplayState(
+                c.Resolve<GameConfiguration>(),
+                c.Resolve<LevelLoader>(),
+                c.Resolve<ISaveDataStorage>(),
+                c.Resolve<ScoreCalculator>()));
             container.RegisterFactory(c => new PauseState());
 
             // State machine
@@ -88,9 +92,9 @@ namespace HexaSort.Core
             // Main application
             container.RegisterFactory(c =>
                 new Application(
+                    c.Resolve<GameConfiguration>(),
                     c.Resolve<GameStateMachine>(),
-                    c.Resolve<AnalyticsReporter>(),
-                    c.Resolve<LocalizationProvider>()
+                    c.Resolve<ViewPresenter>()
                 ));
         }
     }
