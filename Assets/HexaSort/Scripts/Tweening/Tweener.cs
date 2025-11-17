@@ -3,13 +3,14 @@ using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HexaSort.Configuration;
+using HexaSort.Core;
 using UnityEngine;
 
 namespace HexaSort.Tweening
 {
     using CurveType = AnimationCurvesConfiguration.CurveType;
 
-    public class Tweener
+    public class Tweener : IInitializable
     {
         private readonly GameConfiguration _config;
         private readonly AnimationCurve _defaultCurve;
@@ -18,7 +19,10 @@ namespace HexaSort.Tweening
         {
             _config = config;
             _defaultCurve = new AnimationCurve(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        }
 
+        public void Initialize()
+        {
             ValidateCurves();
         }
 

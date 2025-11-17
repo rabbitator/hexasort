@@ -26,11 +26,7 @@ namespace HexaSort.DependencyInjection
             if (!_factories.TryGetValue(type, out var factory)) throw new InvalidOperationException($"Service {type.Name} not registered");
 
             var created = factory(this);
-
-            if (_instances.ContainsKey(type))
-            {
-                _instances[type] = created;
-            }
+            _instances[type] = created;
 
             return (T)created;
         }

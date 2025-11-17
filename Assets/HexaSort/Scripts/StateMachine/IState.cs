@@ -1,13 +1,14 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 
-namespace HexaSort.Game.GameFlow
+namespace HexaSort.StateMachine
 {
-    public interface IGameState : IDisposable
+    public interface IState
     {
-        UniTask Initialize();
+        bool Entered { get; }
+
         UniTask Enter(CancellationToken ct);
+
         UniTask Exit(CancellationToken ct);
     }
 }

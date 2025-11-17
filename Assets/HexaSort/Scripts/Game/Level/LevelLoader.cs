@@ -1,33 +1,60 @@
+using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using HexaSort.Configuration;
+using HexaSort.Core;
 using HexaSort.GameResources;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace HexaSort.Game.Level
 {
-    public class LevelLoader
+    public class LevelLoader : IInitializableAsync
     {
         private readonly GameConfiguration _config;
         private readonly IResourceProvider _resourceProvider;
+        private readonly Dictionary<AssetReference, GameObject> _builtLevels;
+
+        private GameObject _root;
 
         public LevelLoader(GameConfiguration config, IResourceProvider resourceProvider)
         {
             _config = config;
             _resourceProvider = resourceProvider;
+
+            _builtLevels = new Dictionary<AssetReference, GameObject>();
         }
 
-        public async UniTask Load(int index)
+        public async UniTask InitializeAsync(CancellationToken ct)
         {
-            var mapId = _config.Levels.List[index].MapAsset.AssetGUID;
+            _root = new GameObject("Levels Root");
+        }
+
+        public async UniTask Load(AssetReference assetRef)
+        {
+            var mapId = assetRef.AssetGUID;
             var handle = (await _resourceProvider.GetResource<HexMapAsset>(mapId));
             var map = handle.Result;
-            await BuildLevel(map, $"Level_{index}");
+            var levelRoot = await BuildLevel(map, "Level");
             handle.Dispose();
+
+            _builtLevels[assetRef] = levelRoot;
         }
 
-        private async UniTask BuildLevel(HexMapAsset mapAsset, string name)
+        public async UniTask Unload(AssetReference mapAsset)
         {
-            var root = new GameObject(name);
+            if (_builtLevels.TryGetValue(mapAsset, out var root))
+            {
+                Object.Destroy(root);
+                _builtLevels[mapAsset] = null;
+            }
+        }
+
+        private async UniTask<GameObject> BuildLevel(HexMapAsset mapAsset, string name)
+        {
+            var root = new GameObject($"{name}");
+            root.transform.SetParent(_root.transform);
+
             var cellId = _config.Prefabs.HexGridCell.AssetGUID;
             var handle = (await _resourceProvider.GetResource<GameObject>(cellId));
             var cellPrefab = handle.Result;
@@ -43,6 +70,8 @@ namespace HexaSort.Game.Level
             }
 
             handle.Dispose();
+
+            return root;
         }
 
         private void PlaceCell(int x, int y, int index, GameObject root, HexMapAsset mapAsset, GameObject cellPrefab)

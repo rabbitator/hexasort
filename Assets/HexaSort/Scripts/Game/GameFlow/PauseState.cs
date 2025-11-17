@@ -1,16 +1,21 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using HexaSort.StateMachine;
 
 namespace HexaSort.Game.GameFlow
 {
-    public class PauseState : IGameState
+    public class PauseState : IState
     {
-        public async UniTask Initialize() { }
+        public bool Entered { get; private set; }
 
-        public void Dispose() { }
+        public async UniTask Enter(CancellationToken ct)
+        {
+            Entered = true;
+        }
 
-        public async UniTask Enter(CancellationToken ct) { }
-
-        public async UniTask Exit(CancellationToken ct) { }
+        public async UniTask Exit(CancellationToken ct)
+        {
+            Entered = false;
+        }
     }
 }

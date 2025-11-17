@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using HexaSort.Configuration;
 using HexaSort.GameResources;
@@ -32,8 +33,10 @@ namespace HexaSort.UI
             _resourceProvider = resourceProvider;
         }
 
-        public async UniTask InitializeAsync()
+        public async UniTask InitializeAsync(CancellationToken ct)
         {
+            if (ct.IsCancellationRequested) return;
+
             var canvas = Object.FindObjectOfType<Canvas>();
 
             if (!canvas) throw new Exception("Canvas wasn't found!");
@@ -43,9 +46,14 @@ namespace HexaSort.UI
                 await InstantiatePrefab(canvas);
             }
 
+            if (ct.IsCancellationRequested) return;
+
             ConnectViews();
 
             await _uiTransition.InitializeAsync(_lobbyView, _gameplayView, _settingsView);
+
+            if (ct.IsCancellationRequested) return;
+
             _uiTransition.ShowLobby(true);
         }
 
