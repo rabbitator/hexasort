@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3841e00d058b47ff806d021c2fc1e227, type: 3}
   m_Name: HexMap_Lobby
   m_EditorClassIdentifier: 
-  size: {x: 4, y: 4}
-  cells: 00010100010001000001010000000000
+  size: {x: 3, y: 3}
+  cells: 000101010001000101
