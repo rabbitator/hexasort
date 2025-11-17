@@ -6,7 +6,6 @@ using HexaSort.GameResources;
 using HexaSort.UI.Views;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace HexaSort.UI
 {
@@ -21,6 +20,9 @@ namespace HexaSort.UI
         private GameplayView _gameplayView;
         private SettingsView _settingsView;
 
+        // TODO: Replace with correct state machine
+        private bool _isGame = false;
+
         public ViewPresenter(
             UITransition uiTransition,
             ViewBinder viewBinder,
@@ -32,6 +34,11 @@ namespace HexaSort.UI
             _config = config;
             _resourceProvider = resourceProvider;
         }
+
+        // TODO: Connect event bus, map events to UI states
+        public event Action OnPlayButtonClick;
+        public event Action OnMenuButtonClick;
+        public event Action OnSettingsButtonClick;
 
         public async UniTask InitializeAsync(CancellationToken ct)
         {
@@ -55,6 +62,7 @@ namespace HexaSort.UI
             if (ct.IsCancellationRequested) return;
 
             _uiTransition.ShowLobby(true);
+            _isGame = false;
         }
 
         private void ConnectViews()
@@ -66,19 +74,22 @@ namespace HexaSort.UI
 
         private void HandlePlayClick()
         {
-            if (Random.value > 0.5f)
+            if (!_isGame)
             {
-                _uiTransition.ShakePlayButton();
-            }
-            else
-            {
+                OnPlayButtonClick?.Invoke();
                 _uiTransition.ShowGameplay();
+                _isGame = true;
             }
         }
 
         private void HandleMenuClick()
         {
-            _uiTransition.ShowLobby();
+            if (_isGame)
+            {
+                OnMenuButtonClick?.Invoke();
+                _uiTransition.ShowLobby();
+                _isGame = false;
+            }
         }
 
         private void HandleSettingsClick()

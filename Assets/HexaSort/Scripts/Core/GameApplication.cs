@@ -2,6 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using HexaSort.Configuration;
 using HexaSort.Game.GameFlow;
+using HexaSort.StateMachine;
 using HexaSort.UI;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ namespace HexaSort.Core
         private readonly GameStateMachine _gameStateMachine;
         private readonly ViewPresenter _viewPresenter;
 
+        private CancellationTokenSource _statesCts = new();
+
         public GameApplication(
             GameConfiguration gameConfiguration,
             GameStateMachine gameStateMachine,
@@ -21,6 +24,9 @@ namespace HexaSort.Core
             _gameConfiguration = gameConfiguration;
             _gameStateMachine = gameStateMachine;
             _viewPresenter = viewPresenter;
+
+            _viewPresenter.OnPlayButtonClick += HandlePlayClick;
+            _viewPresenter.OnMenuButtonClick += HandleMenuClick;
         }
 
         public async UniTask InitializeAsync(CancellationToken ct)
@@ -39,13 +45,30 @@ namespace HexaSort.Core
 
         public async UniTask StartAsync(CancellationToken ct)
         {
-            await _gameStateMachine.ExitAllStates(ct);
-            await _gameStateMachine.EnterState<LobbyState>(ct);
+            await EnterState<LobbyState>(ct);
         }
 
         private void SetupApplication()
         {
             Application.targetFrameRate = _gameConfiguration.Application.TargetFramerate;
+        }
+
+        private void HandlePlayClick() => SwitchState<GameplayState>();
+
+        private void HandleMenuClick() => SwitchState<LobbyState>();
+
+        private void SwitchState<TState>() where TState : IState
+        {
+            _statesCts.Cancel();
+            _statesCts = new CancellationTokenSource();
+
+            EnterState<TState>(_statesCts.Token).Forget();
+        }
+
+        private async UniTask EnterState<TState>(CancellationToken ct) where TState : IState
+        {
+            await _gameStateMachine.ExitAllStates(ct);
+            await _gameStateMachine.EnterState<TState>(ct);
         }
     }
 }
