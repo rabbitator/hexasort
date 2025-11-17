@@ -455,13 +455,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2056879617}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.561126, y: -0, z: -0, w: 0.8277304}
-  m_LocalPosition: {x: 0, y: 7.08, z: -3.74}
+  m_LocalRotation: {x: 0.46315053, y: -0, z: -0, w: 0.88627964}
+  m_LocalPosition: {x: 0, y: 28.5, z: -19.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2039155068}
-  m_LocalEulerAnglesHint: {x: 68.267, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 55.181, y: 0, z: 0}
 --- !u!81 &2056879619
 AudioListener:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 13
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
