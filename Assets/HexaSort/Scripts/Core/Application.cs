@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using HexaSort.Configuration;
 using HexaSort.Game.GameFlow;
 using HexaSort.UI;
-using UnityEngine.SceneManagement;
 
 namespace HexaSort.Core
 {
@@ -25,12 +24,9 @@ namespace HexaSort.Core
         public async UniTask InitializeAsync()
         {
             SetupApplication();
-
-            await WaitSceneLoad();
-            var t1 = _gameStateMachine.InitializeAsync();
-            var t2 = _viewPresenter.InitializeAsync();
-
-            await UniTask.WhenAll(t1, t2);
+            await UniTask.WhenAll(
+                _gameStateMachine.InitializeAsync(),
+                _viewPresenter.InitializeAsync());
         }
 
         public void Play()
@@ -41,21 +37,6 @@ namespace HexaSort.Core
         private void SetupApplication()
         {
             UnityEngine.Application.targetFrameRate = _gameConfiguration.Application.TargetFramerate;
-        }
-
-        private async UniTask WaitSceneLoad()
-        {
-            if (SceneManager.loadedSceneCount > 0) return;
-
-            var cs = new UniTaskCompletionSource();
-            SceneManager.sceneLoaded += handleSceneLoaded;
-            await cs.Task;
-
-            void handleSceneLoaded(Scene scene, LoadSceneMode loadMode)
-            {
-                SceneManager.sceneLoaded -= handleSceneLoaded;
-                cs.TrySetResult();
-            }
         }
     }
 }

@@ -6,7 +6,7 @@ namespace HexaSort.Core
     {
         private static bool _initialized;
         
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void Initialize()
         {
             if (_initialized) return;
