@@ -42,6 +42,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9ed64762b268a8645b4f57e2c609895a
+    m_Address: HexMap_Lobby
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a8890a4c5a0a9f3448d8ef279f210448
     m_Address: HexaSortConfig
     m_ReadOnly: 0

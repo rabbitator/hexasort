@@ -13,19 +13,19 @@ namespace HexaSort.Configuration
         private ApplicationConfiguration _application;
 
         [SerializeField]
-        private LevelConfiguration[] _levels;
+        private LevelsConfiguration _levels;
 
         [SerializeField]
         private PrefabsConfiguration _prefabs;
 
-        [FormerlySerializedAs("_animations")] [SerializeField]
+        [SerializeField]
         private List<AnimationCurvesConfiguration> animationCurves;
 
         [SerializeField]
         private SaveStorageKeysConfiguration _saveStorageKeys;
 
         public ApplicationConfiguration Application => _application;
-        public IReadOnlyList<LevelConfiguration> Levels => _levels;
+        public LevelsConfiguration Levels => _levels;
         public PrefabsConfiguration Prefabs => _prefabs;
         public List<AnimationCurvesConfiguration> AnimationCurves => animationCurves;
         public SaveStorageKeysConfiguration SaveStorageKeys => _saveStorageKeys;
@@ -38,6 +38,19 @@ namespace HexaSort.Configuration
         private int _targetFramerate = 60;
 
         public int TargetFramerate => _targetFramerate;
+    }
+
+    [Serializable]
+    public class LevelsConfiguration
+    {
+        [SerializeField]
+        private LevelConfiguration _lobbyLevel;
+
+        [Space, Header("Levels list"), SerializeField]
+        private LevelConfiguration[] _list;
+
+        public LevelConfiguration LobbyLevel => _lobbyLevel;
+        public IReadOnlyList<LevelConfiguration> List => _list;
     }
 
     [Serializable]
@@ -81,10 +94,10 @@ namespace HexaSort.Configuration
         private CurveType _type;
 
         [SerializeField]
-        private AnimationCurve curve = new(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
+        private AnimationCurve _curve = new(new Keyframe(0.0f, 0.0f), new Keyframe(1.0f, 1.0f));
 
         public CurveType Type => _type;
-        public AnimationCurve Curve => curve;
+        public AnimationCurve Curve => _curve;
     }
 
     [Serializable]

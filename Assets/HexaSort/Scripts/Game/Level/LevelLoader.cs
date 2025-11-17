@@ -18,7 +18,7 @@ namespace HexaSort.Game.Level
 
         public async UniTask Load(int index)
         {
-            var mapId = _config.Levels[index].MapAsset.AssetGUID;
+            var mapId = _config.Levels.List[index].MapAsset.AssetGUID;
             var handle = (await _resourceProvider.GetResource<HexMapAsset>(mapId));
             var map = handle.Result;
             await BuildLevel(map, $"Level_{index}");

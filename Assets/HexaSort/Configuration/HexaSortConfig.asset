@@ -15,21 +15,28 @@ MonoBehaviour:
   _application:
     _targetFramerate: 60
   _levels:
-  - _mapAsset:
-      m_AssetGUID: 7c3efa58bb16973448e5fc2b57514d62
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-  - _mapAsset:
-      m_AssetGUID: b000db06932b87d46a2ddce1da54d3be
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
-  - _mapAsset:
-      m_AssetGUID: 87622e58149ab634b9f538fc81a70bd4
-      m_SubObjectName: 
-      m_SubObjectType: 
-      m_EditorAssetChanged: 0
+    _lobbyLevel:
+      _mapAsset:
+        m_AssetGUID: 9ed64762b268a8645b4f57e2c609895a
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+    _list:
+    - _mapAsset:
+        m_AssetGUID: 7c3efa58bb16973448e5fc2b57514d62
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+    - _mapAsset:
+        m_AssetGUID: b000db06932b87d46a2ddce1da54d3be
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
+    - _mapAsset:
+        m_AssetGUID: 87622e58149ab634b9f538fc81a70bd4
+        m_SubObjectName: 
+        m_SubObjectType: 
+        m_EditorAssetChanged: 0
   _prefabs:
     _hexGridCell:
       m_AssetGUID: 5b501cbd6966ae1458b9d7f80f73c5c7
@@ -48,7 +55,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
   animationCurves:
   - _type: 100
-    curve:
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -82,7 +89,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   - _type: 200
-    curve:
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -134,7 +141,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   - _type: 300
-    curve:
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
@@ -168,7 +175,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   - _type: 400
-    curve:
+    _curve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
