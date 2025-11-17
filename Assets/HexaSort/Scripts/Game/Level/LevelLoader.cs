@@ -81,7 +81,9 @@ namespace HexaSort.Game.Level
             var cell = Object.Instantiate(cellPrefab, root.transform);
             var xPos = x * 0.8667f + (y % 2 == 0 ? 0.0f : 0.43333f);
             var yPos = -y * 0.75f;
-            cell.transform.localPosition = new Vector3(xPos, 0.02f /* TODO: Take it to config */, yPos);
+            xPos -= 0.5f * mapAsset.size.x * 0.8667f;
+            yPos += 0.5f * mapAsset.size.y * 0.75f;
+            cell.transform.localPosition = new Vector3(xPos, 0.0f, yPos);
         }
     }
 }
